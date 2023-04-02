@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/sultan/static/css/main.e70efb95.css",
+    "main.js": "/sultan/static/js/main.6b6a5831.js",
+    "index.html": "/sultan/index.html",
+    "main.e70efb95.css.map": "/sultan/static/css/main.e70efb95.css.map",
+    "main.6b6a5831.js.map": "/sultan/static/js/main.6b6a5831.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e70efb95.css",
+    "static/js/main.6b6a5831.js"
+  ]
+}
