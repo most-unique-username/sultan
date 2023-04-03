@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap");
+.buttonIcon {
+  display: flex;
+  align-items: center;
+  padding: 21px 45px;
+  background: #FFC85E;
+  border-radius: 40px;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  white-space: nowrap;
+  color: #FFFFFF;
+}
+
+@media (min-width: 1024px) {
+  .buttonIcon {
+    padding: 21px 18px;
+  }
+}
+@media (min-width: 1500px) {
+  .buttonIcon {
+    padding: 21px 45px;
+  }
+}

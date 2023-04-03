@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;500&display=swap");
+.inputPrice-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #3F4E65;
+}
+
+.inputPrice-input {
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 14px;
+  color: #3F4E65;
+  white-space: nowrap;
+  text-align: center;
+  background: rgba(255, 198, 80, 0.3);
+  border-radius: 40px;
+  width: 45%;
+  padding: 4px 0;
+}
