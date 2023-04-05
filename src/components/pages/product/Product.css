@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;800&display=swap");
+.page-product {
+  font-family: Inter, sans-serif;
+  color: #111111;
+  padding-bottom: 60px;
+}
+.page-product__row {
+  display: flex;
+  padding-top: 65px;
+}
+.page-product__size-box {
+  display: flex;
+  align-items: center;
+}
+.page-product__add-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 500px;
+  padding-top: 25px;
+  padding-bottom: 50px;
+}
+.page-product__price-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 95%;
+}
+.page-product__img-box {
+  text-align: center;
+  flex-basis: 50%;
+}
+.page-product__img {
+  display: inline;
+  max-height: 65%;
+  max-width: 65%;
+}
+.page-product__product-data {
+  flex-basis: 50%;
+}
+.page-product__stock {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #1FD85D;
+}
+.page-product__title {
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 45px;
+  padding: 10px 0;
+}
+.page-product__icon {
+  margin-right: 5px;
+  line-height: 0;
+}
+.page-product__icon_button {
+  margin-right: 0;
+  margin-left: 12px;
+}
+.page-product__icon_link {
+  margin: 0;
+  padding: 28px;
+}
+.page-product__info {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  color: #3F4E65;
+  max-width: 25em;
+  text-align: center;
+}
+.page-product__price {
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 39px;
+}
+.page-product__button {
+  background: #FFFFFF;
+  color: #3F4E65;
+}
+.page-product__property-box {
+  padding-top: 20px;
+}
+.page-product__property-box_description {
+  padding: 30px 0 20px;
+}
+.page-product__property-box__list {
+  padding-top: 15px;
+}
+.page-product__property-box__subtitle {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+.page-product__property-box__property {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 21px;
+  color: #3F4E65;
+  padding-top: 5px;
+}
+.page-product__border {
+  width: 50%;
+  height: 0;
+  border-bottom: 1px dashed #3F4E65;
+}

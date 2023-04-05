@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+.page-footer {
+  font-family: Inter, sans-serif;
+  color: #FFFFFF;
+  padding-top: 70px;
+  padding-bottom: 116px;
+  background: #3F4E65;
+
+  &__row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  &__company-about {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    padding-top: 15px;
+  }
+
+  &__subs-title {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    padding-top: 45px;
+    padding-bottom: 14px;
+  }
+
+  &__subs-input {
+    width: 75%;
+
+    &__icon {
+      padding: 13px 16px;
+      line-height: 0;
+    }
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    white-space: nowrap;
+    margin-bottom: 25px;
+  }
+
+  &__subtitle {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    white-space: nowrap;
+    padding-top: 20px;
+    margin-bottom: 15px;
+  }
+
+  &__link {
+    display: block;
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    color: #FFFFFF;
+    white-space: nowrap;
+    margin-top: 20px;
+  }
+
+  &__icon {
+    line-height: 0;
+    margin-left: 15px;
+  }
+
+  &__images-box {
+    display: flex;
+  }
+
+  &__img-box {
+
+    &:last-child {
+      margin-left: 10px;
+    }
+  }
+
+  &__contact {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    margin-bottom: 25px;
+
+    &__title {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 26px;
+    }
+
+    &__subtitle {
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 23px;
+    }
+
+    &__link {
+      font-family: Inter, sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      line-height: 20px;
+      color: #FFFFFF;
+      text-decoration: underline;
+    }
+
+    &:last-child {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-footer__col_shrink {
+    flex-basis: 20%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .page-footer__col_shrink {
+    flex-basis: 25%;
+  }
+}
+
+@media (min-width: 1900px) {
+  .page-footer__col_shrink {
+    flex-basis: 30%;
+  }
+}

@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap");
+.inputIcon-box {
+  position: relative;
+  width: 100%;
+}
+
+.inputIcon-input {
+  padding: 22px 20px;
+  background: #EDEDED;
+  border-radius: 40px;
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #5C6370;
+  width: 100%;
+}
+
+.inputIcon-icon {
+  position: absolute;
+  padding: 13px;
+  top: 10px;
+  right: 10px;
+  background: #FFC85E;
+  border-radius: 40px;
+  line-height: 0;
+}
+
+@media (min-width: 1024px) {
+  .inputIcon-input {
+    padding: 22px 12px;
+  }
+}
+@media (min-width: 1500px) {
+  .inputIcon-input {
+    padding: 22px 20px;
+  }
+}
