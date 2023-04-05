@@ -203,7 +203,7 @@ export const Header = () => {
                   icon={basketIcon}
                   boxClass="page-header__price__icon"
                 >
-                  < p className='circle'>{busket.products}</p>
+                  <p className='circle'>{busket.products}</p>
                 </IconBox>
               </NavLink>
 

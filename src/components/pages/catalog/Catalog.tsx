@@ -49,7 +49,7 @@ export const Catalog = () => {
     filter((value, index, self) => self.indexOf(value) === index);
 
   const addProduct = (product: IProduct): void => {
-    dispatch({ type: BasketActionTypes.ADD_PRODUCT, payload: { product: product, quantity: 1 } });
+    dispatch({ type: BasketActionTypes.CHANGE_QUANTITY_PRODUCT, payload: { product: product, quantity: 1 } });
   }
 
   const filterCategories = (category: string): void => {

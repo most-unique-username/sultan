@@ -41,7 +41,7 @@ export const Product = () => {
   const productProperty: string[] = productPropertyArray(product);
 
   const addProduct = (product: IProduct, quantity: number): void => {
-    dispatch({ type: BasketActionTypes.ADD_PRODUCT, payload: { product: product, quantity: quantity } });
+    dispatch({ type: BasketActionTypes.CHANGE_QUANTITY_PRODUCT, payload: { product: product, quantity: quantity } });
   }
 
   return (

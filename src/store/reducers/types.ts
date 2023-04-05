@@ -1,13 +1,13 @@
 import { BusketProduct, SortTypes } from '../../types/types';
 
 export enum BasketActionTypes {
-  ADD_PRODUCT = "ADD_PRODUCT",
+  CHANGE_QUANTITY_PRODUCT = "CHANGE_QUANTITY_PRODUCT",
   DELETE_PRODUCT = "DELETE_PRODUCT",
-  CHANGE_NUMBER_PRODUCT = "CHANGE_NUMBER_PRODUCT"
+  CLEAR_BASKET = "CLEAR_BASKET"
 }
 
-interface AddProductAction {
-  type: BasketActionTypes.ADD_PRODUCT;
+interface ChangeQuantityProductAction {
+  type: BasketActionTypes.CHANGE_QUANTITY_PRODUCT;
   payload: BusketProduct;
 }
 
@@ -16,13 +16,11 @@ interface DeleteProductAction {
   payload: number;
 }
 
-// interface ChangeNumberProductAction {
-//   type: BasketActionTypes.CHANGE_NUMBER_PRODUCT;
-//   payload: BusketProduct;
-// }
+interface ClearBasketAction {
+  type: BasketActionTypes.CLEAR_BASKET;
+}
 
-export type BasketAction = AddProductAction | DeleteProductAction
-  //  | ChangeNumberProductAction
+export type BasketAction = ChangeQuantityProductAction | DeleteProductAction | ClearBasketAction
   ;
 
 export enum FilterActionTypes {
