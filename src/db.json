@@ -255,6 +255,48 @@
       "country": "Россия",
       "sizeType": "Объем",
       "size": 75
+    },
+    {
+      "vendorCode": 482083,
+      "name": "Крем для рук SVOBODA",
+      "description": "Крем для рук SVOBODA, 80мл, Россия",
+      "price": 83.19,
+      "url": "https://lenta.servicecdn.ru/globalassets/1/-/48/202/83/335393_9.png",
+      "category": [
+        "Уход за руками"
+      ],
+      "brand": "SVOBODA",
+      "country": "Россия",
+      "sizeType": "Объем",
+      "size": 80
+    },
+    {
+      "vendorCode": 568293,
+      "name": "Крем для рук OLEA Limited edition Llama питательный",
+      "description": "Крем для рук OLEA Limited edition Llama питательный, 30г, Россия",
+      "price": 85.09,
+      "url": "https://lenta.servicecdn.ru/globalassets/1/-/56/82/93/328227_9.png",
+      "category": [
+        "Уход за руками"
+      ],
+      "brand": "OLEA",
+      "country": "Россия",
+      "sizeType": "Вес",
+      "size": 30
+    },
+    {
+      "vendorCode": 568292,
+      "name": "Крем для рук OLEA Limited edition Koala увлажняющий",
+      "description": "Крем для рук OLEA Limited edition Koala увлажняющий, 30мл, Россия",
+      "price": 85.09,
+      "url": "https://lenta.servicecdn.ru/globalassets/1/-/56/82/92/328226_9.png",
+      "category": [
+        "Уход за руками"
+      ],
+      "brand": "OLEA",
+      "country": "Россия",
+      "sizeType": "Объем",
+      "size": 30
     }
   ]
 }

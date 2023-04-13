@@ -1,31 +1,33 @@
 import { NavLink } from 'react-router-dom';
 import { Container } from '../Container';
 import { Button } from '../button/Button';
-import { InputWithIcon } from '../inputWithIcon/InputWithIcon';
+import { InputButton } from '../inputButton/InputButton';
 import { ContactBox } from '../ContactBox';
 import { IconBox } from '../IconBox';
 import { ImgBox } from '../ImgBox';
 import { List } from '../List';
 import { ItemLink } from '../ItemLink';
-import { ILink } from '../../types/types';
+import { IItemLink } from '../../types/types';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import './Header.css'
 import '../../styles/styles.css'
 import phoneImage from "../../img/phone.png"
 
-const addressIcon = <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" viewBox="0 0 16 18" fill="none">
+const addressIcon = <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M8 9.8335C9.38071 9.8335 10.5 8.71421 10.5 7.3335C10.5 5.95278 9.38071 4.8335 8 4.8335C6.61929 4.8335 5.5 5.95278 5.5 7.3335C5.5 8.71421 6.61929 9.8335 8 9.8335Z" stroke="#3F4E65" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
   <path d="M8.00016 0.666748C6.23205 0.666748 4.53636 1.36913 3.28612 2.61937C2.03588 3.86961 1.3335 5.5653 1.3335 7.33342C1.3335 8.91008 1.6685 9.94175 2.5835 11.0834L8.00016 17.3334L13.4168 11.0834C14.3318 9.94175 14.6668 8.91008 14.6668 7.33342C14.6668 5.5653 13.9644 3.86961 12.7142 2.61937C11.464 1.36913 9.76827 0.666748 8.00016 0.666748V0.666748Z" stroke="#3F4E65" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
 </svg>
+
 
 const emailIcon = <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 18 14" fill="none">
   <path d="M3.37484 0.333252H14.6248C15.3166 0.333207 15.9822 0.59788 16.485 1.07298C16.9879 1.54808 17.2898 2.19758 17.329 2.88825L17.3332 3.04158V10.9583C17.3332 11.65 17.0685 12.3156 16.5934 12.8184C16.1183 13.3213 15.4688 13.6233 14.7782 13.6624L14.6248 13.6666H3.37484C2.68306 13.6666 2.01748 13.402 1.51464 12.9269C1.01181 12.4518 0.709836 11.8023 0.670671 11.1116L0.666504 10.9583V3.04158C0.666459 2.3498 0.931132 1.68423 1.40623 1.18139C1.88133 0.678558 2.53083 0.376584 3.2215 0.337419L3.37484 0.333252H14.6248H3.37484ZM16.0832 4.81075L9.2915 8.38575C9.21482 8.42626 9.13054 8.45037 9.04402 8.45654C8.95751 8.46271 8.87066 8.4508 8.789 8.42159L8.709 8.38658L1.9165 4.81158V10.9583C1.91652 11.3242 2.05415 11.6768 2.30207 11.9461C2.54999 12.2153 2.89009 12.3815 3.25484 12.4116L3.37484 12.4166H14.6248C14.991 12.4166 15.3437 12.2788 15.6129 12.0307C15.8822 11.7826 16.0483 11.4423 16.0782 11.0774L16.0832 10.9583V4.81075ZM14.6248 1.58325H3.37484C3.00885 1.58327 2.65624 1.72089 2.38701 1.96882C2.11778 2.21674 1.95162 2.55683 1.9215 2.92159L1.9165 3.04158V3.39908L8.99984 7.12659L16.0832 3.39825V3.04158C16.0831 2.67546 15.9454 2.32274 15.6973 2.0535C15.4492 1.78425 15.1089 1.61817 14.744 1.58825L14.6248 1.58325Z" fill="#3F4E65" />
 </svg>
 
-const menuItems: ILink[] = [
-  { text: "О компании", link: "#" },
-  { text: "Доставка и оплата", link: "#" },
-  { text: "Возврат", link: "#" },
-  { text: "Контакты", link: "#" }
+const menuItems: IItemLink[] = [
+  { item: "О компании", link: "#" },
+  { item: "Доставка и оплата", link: "#" },
+  { item: "Возврат", link: "#" },
+  { item: "Контакты", link: "#" }
 ];
 
 const logoIcon = <svg xmlns="http://www.w3.org/2000/svg" width="156" height="66" viewBox="0 0 156 66" fill="none">
@@ -95,7 +97,7 @@ export const Header = () => {
 
             </Container>
 
-            <Container containerClass="page-header__contact page-header__contact_indent" >
+            <Container containerClass="page-header__contact" >
 
               <IconBox
                 icon={emailIcon}
@@ -115,9 +117,9 @@ export const Header = () => {
           </Container>
 
           <nav className='page-header__menu'>
-            <List<ILink>
+            <List<IItemLink>
               list={menuItems}
-              renderItem={(item: ILink) =>
+              renderItem={item =>
                 <ItemLink
                   item={item}
                   linkClass="page-header__menu__link"
@@ -152,8 +154,8 @@ export const Header = () => {
               </Button>
             </NavLink>
 
-            <InputWithIcon
-              inputClass='page-header__input-box'
+            <InputButton
+              boxClass='page-header__input-box'
               placeholder='Поиск...'
               icon={searchIcon}
             />
@@ -203,18 +205,14 @@ export const Header = () => {
                   icon={basketIcon}
                   boxClass="page-header__price__icon"
                 >
-                  <p className='circle'>{busket.products}</p>
+                  <p className='page-header__price-circle' hidden={busket.products === 0}>{busket.products}</p>
                 </IconBox>
               </NavLink>
 
-
-              <ContactBox
-                boxClass="page-header__contact__data"
-                title="Корзина"
-                titleClass="page-header__contact__subtitle"
-                subtitle={busket.sum.toString()}
-                subtitleClass="page-header__contact__title"
-              />
+              <Container containerClass="page-header__contact__data">
+                <p className="page-header__contact__subtitle">Корзина</p>
+                <p className="page-header__contact__title" hidden={busket.products === 0}>{`${busket.sum.toString()}₸`}</p>
+              </Container>
 
             </Container>
 
@@ -224,5 +222,6 @@ export const Header = () => {
 
       </Container>
 
-    </div >);
+    </div >
+  );
 }

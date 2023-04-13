@@ -11,6 +11,7 @@
   line-height: 18px;
   white-space: nowrap;
   color: #FFFFFF;
+  gap: 12px;
 }
 
 @media (min-width: 1024px) {

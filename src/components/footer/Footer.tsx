@@ -1,6 +1,6 @@
 import { Container } from '../Container';
 import { Button } from '../button/Button';
-import { InputWithIcon } from '../inputWithIcon/InputWithIcon';
+import { InputButton } from '../inputButton/InputButton';
 import { ContactBox } from '../ContactBox';
 import { IconBox } from '../IconBox';
 import { ImgBox } from '../ImgBox';
@@ -8,7 +8,7 @@ import { List } from '../List';
 import { ItemLink } from '../ItemLink';
 import './Footer.css'
 import '../../styles/styles.css'
-import { ILink } from '../../types/types';
+import { IItemLink } from '../../types/types';
 import whatsApp from "../../img/whatsApp.png"
 import telegram from "../../img/telegram.png"
 import visaImage from "../../img/visa.png"
@@ -37,19 +37,19 @@ const inputIcon = <svg xmlns="http://www.w3.org/2000/svg" width="8" height="15" 
   <path d="M0 12.8571L5 7.5L0 2.14286L1 0L8 7.5L1 15L0 12.8571Z" fill="white" />
 </svg>
 
-const menuItems: ILink[] = [
-  { text: "О компании", link: "#" },
-  { text: "Доставка и оплата", link: "#" },
-  { text: "Возврат", link: "#" },
-  { text: "Контакты", link: "#" },
+const menuItems: IItemLink[] = [
+  { item: "О компании", link: "#" },
+  { item: "Доставка и оплата", link: "#" },
+  { item: "Возврат", link: "#" },
+  { item: "Контакты", link: "#" },
 ];
 
-const categoriesItems: ILink[] = [
-  { text: "Бытовая химия", link: "#" },
-  { text: "Косметика и гигиена", link: "#" },
-  { text: "Товары для дома", link: "#" },
-  { text: "Товары для детей и мам", link: "#" },
-  { text: "Посуда", link: "#" },
+const categoriesItems: IItemLink[] = [
+  { item: "Бытовая химия", link: "#" },
+  { item: "Косметика и гигиена", link: "#" },
+  { item: "Товары для дома", link: "#" },
+  { item: "Товары для детей и мам", link: "#" },
+  { item: "Посуда", link: "#" },
 ];
 
 const priceIcon = <svg xmlns="http://www.w3.org/2000/svg" width="12" height="13" viewBox="0 0 12 13" fill="none">
@@ -72,8 +72,8 @@ export const Footer = () => {
             />
             <p className="page-footer__company-about">Компания «Султан» — снабжаем розничные магазины товарами "под&nbsp;ключ" в Кокчетаве и Акмолинской области</p>
             <p className="page-footer__subs-title">Подпишись на скидки и акции</p>
-            <InputWithIcon
-              inputClass='page-footer__subs-input'
+            <InputButton
+              boxClass='page-footer__subs-input'
               placeholder='Введите ваш E-mail'
               icon={inputIcon} iconClass='page-footer__subs-input__icon'
             />
@@ -82,10 +82,10 @@ export const Footer = () => {
 
           <Container containerClass='page-footer__col'>
 
-            <List<ILink>
+            <List<IItemLink>
               title={<p className="page-footer__title">Меню сайта:</p>}
               list={menuItems}
-              renderItem={(item: ILink) =>
+              renderItem={item =>
                 <ItemLink
                   item={item}
                   linkClass="page-footer__link"
@@ -96,10 +96,10 @@ export const Footer = () => {
 
           <Container containerClass='page-footer__col'>
 
-            <List<ILink>
+            <List<IItemLink>
               title={<p className="page-footer__title">Категории:</p>}
               list={categoriesItems}
-              renderItem={(item: ILink) =>
+              renderItem={item =>
                 <ItemLink
                   item={item}
                   linkClass="page-footer__link"
@@ -108,7 +108,7 @@ export const Footer = () => {
 
           </Container>
 
-          <Container containerClass='page-footer__col'>
+          <Container containerClass='page-footer__col page-footer__col_price'>
 
             <p className="page-footer__title">Скачать прайс-лист:</p>
 

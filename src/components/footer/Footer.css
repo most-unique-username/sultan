@@ -1,4 +1,28 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600700;800&display=swap");
+.container {
+  padding: 0 15%;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 3%;
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 4%;
+  }
+}
+@media (min-width: 1400px) {
+  .container {
+    padding: 0 7%;
+  }
+}
+@media (min-width: 1800px) {
+  .container {
+    padding: 0 15%;
+  }
+}
 .page-footer {
   font-family: Inter, sans-serif;
   color: #FFFFFF;
@@ -58,13 +82,10 @@
 }
 .page-footer__icon {
   line-height: 0;
-  margin-left: 15px;
 }
 .page-footer__images-box {
   display: flex;
-}
-.page-footer__img-box:last-child {
-  margin-left: 10px;
+  gap: 10px;
 }
 .page-footer__contact {
   display: flex;
@@ -94,6 +115,20 @@
   margin-bottom: 10px;
 }
 
+@media (max-width: 1024px) {
+  .page-footer__row {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .page-footer__col_shrink {
+    order: -2;
+    flex-grow: 1;
+    flex-basis: 60%;
+  }
+  .page-footer__col_price {
+    order: -1;
+  }
+}
 @media (min-width: 1024px) {
   .page-footer__col_shrink {
     flex-basis: 20%;

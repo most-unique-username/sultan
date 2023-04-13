@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;800&display=swap');
+@import "../../../styles/styles.scss";
 
 .page-catalog {
   font-family: Inter, sans-serif;
@@ -8,7 +8,7 @@
 
   &__row {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
     padding-top: 50px;
   }
 
@@ -19,13 +19,21 @@
 
   &__category-menu {
     display: flex;
+    align-items: center;
     padding-top: 25px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    text-align: center;
+    color: #3F4E65;
+    white-space: normal;
   }
 
   &__title {
     font-size: 40px;
     font-weight: 500;
     line-height: 48px;
+    flex-grow: 1;
   }
 
   &__sort {
@@ -35,7 +43,6 @@
   }
 
   &__select {
-    display: inline-block;
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
@@ -44,22 +51,24 @@
     appearance: none;
   }
 
-  &__categories {
-    display: flex;
+  &__category {
+    padding: 15px 18px;
+    cursor: pointer;
 
-    &__item {
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 17px;
-      text-align: center;
-      color: #3F4E65;
-      white-space: normal;
-      padding: 15px 18px;
+    &:hover {
+      background-color: rgba(255, 198, 80, 0.3);
+      border-radius: 5px;
+    }
+
+    &_active {
+      background-color: #FFC85E;
+      border-radius: 5px;
     }
   }
 
   &__filters {
     margin-right: 7%;
+    align-self: start;
 
     &__title {
       font-size: 16px;
@@ -89,7 +98,7 @@
     &__check-box {
       display: flex;
       flex-direction: column;
-      padding: 15px 0 25px;
+      padding: 15px 0;
     }
 
     &__check {
@@ -114,7 +123,27 @@
       font-weight: 400;
       line-height: 21px;
       color: #3F4E65;
-      margin-top: 10px;
+      padding: 5px 0;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgba(255, 198, 80, 0.3);
+        border-radius: 5px;
+      }
+
+      &_active {
+        background-color: #FFC85E;
+        padding-left: 5px;
+        border-radius: 5px;
+      }
+    }
+
+    &__show {
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 18px;
+      color: #3F4E65;
+      padding-right: 5px;
     }
   }
 
@@ -128,7 +157,28 @@
     padding-bottom: 20px;
   }
 
-  &__catalog-box {
+  &__pages-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 60px;
+    gap: 14px;
+
+    &__page {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 18px;
+      color: #3F4E65;
+      padding: 8px 14px;
+
+      &_current {
+        background-color: rgba(255, 198, 80, 0.3);
+        border-radius: 50%;
+      }
+    }
+  }
+
+  &__products {
     display: flex;
     flex-wrap: wrap;
     margin: 0 -10px;
@@ -138,9 +188,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    flex-basis: 50%;
-    // width: 20vw;
     white-space: normal;
+    padding: 30px;
 
     &__img-box {
       height: 194px;
@@ -170,7 +219,7 @@
       font-size: 16px;
       font-weight: 500;
       line-height: 21px;
-      padding-top: 10px;
+      padding: 10px 0 20px;
     }
 
     &__price {
@@ -196,15 +245,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    &__icon {
-      line-height: 0;
-      padding-left: 6px;
-    }
+    padding-top: 25px;
   }
 
   &__button-icon {
     padding: 21px;
+    margin-left: 10px;
   }
 
   &__icon {
@@ -212,14 +258,52 @@
   }
 }
 
-@media (min-width: 0px) {
-  .page-catalog__product-box {
-    padding: 30px 15px;
+@media (max-width: 620px) {
+
+  .page-catalog__row {
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+  }
+
+  .page-catalog__filters {
+    margin: 0;
+  }
+
+  .page-catalog__category-menu {
+    flex-direction: column;
+    align-items: start;
+    gap: 5px;
+  }
+
+  .page-catalog__product-box,
+  .page-catalog__catalog-box {
+    width: 100%;
+    padding: 0;
+  }
+
+  .page-catalog__products {
+    margin: 0;
+    gap: 20px;
+  }
+
+  .page-catalog__category {
+    padding: 5px 0;
+
+    &_active {
+      padding: 5px;
+    }
   }
 }
 
 @media (min-width: 1024px) {
   .page-catalog__product-box {
-    padding: 30px;
+    width: 50%;
+  }
+}
+
+@media (min-width: 1500px) {
+  .page-catalog__product-box {
+    width: calc(100%/3);
   }
 }

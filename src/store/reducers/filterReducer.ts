@@ -1,74 +1,71 @@
 import { FilterActionTypes, FilterAction } from './types';
 import productsBase from "../../db.json"
 import { IProduct, SortTypes } from '../../types/types';
+import { getProductsLocalStorage } from '../../functions/getProductsLocalStorage';
 
 interface FilterState {
-  minPrice: number;
-  maxPrice: number;
-  brands: string[];
-  brand: string;
   products: IProduct[];
+  productsFiltered: IProduct[];
 }
 
+const productsLocalStorage: IProduct[] = getProductsLocalStorage();
+
 const initialState: FilterState = {
-  minPrice: 0,
-  maxPrice: 1000,
-  brands: new Array<string>,
-  brand: "",
-  products: productsBase.goods,
+  products:
+    productsLocalStorage.length === 0 ?
+      productsBase.goods :
+      productsLocalStorage,
+  productsFiltered:
+    productsLocalStorage.length === 0 ?
+      productsBase.goods :
+      productsLocalStorage
 }
 
 export const filterReducer = (state = initialState, action: FilterAction): FilterState => {
+  let productsFiltered: IProduct[];
 
   switch (action.type) {
 
-    case FilterActionTypes.CHANGE_MIN_PTICE:
-      return { ...state, minPrice: action.payload };
-
-    case FilterActionTypes.CHANGE_MAX_PTICE:
-      state.maxPrice = action.payload;
-      return { ...state, maxPrice: action.payload };
-
-    case FilterActionTypes.ADD_BRAND:
-      state.brands.push(action.payload);
-      return { ...state };
-
     case FilterActionTypes.FILTER_PRODUCTS:
-      state.brands.length === 0 ?
-        state.products = state.products.filter(item =>
-          item.price >= state.minPrice &&
-          item.price <= state.maxPrice
-        ) :
-        state.products = state.products.filter(item =>
-          item.price >= state.minPrice &&
-          item.price <= state.maxPrice &&
-          state.brands.includes(item.brand)
-        );
-      return { ...state };
+      productsFiltered = state.products.filter(item =>
+        item.price >= action.payload.price.min &&
+        item.price <= action.payload.price.max
+      );
 
-    case FilterActionTypes.DELETE_FILTERS:
-      return { ...initialState };
+      for (let filter of action.payload.filters) {
+
+        if (filter.filters.length > 0) {
+          productsFiltered = productsFiltered.filter(item =>
+            filter.filters.includes(item[filter.name])
+          );
+        }
+      }
+
+      if (action.payload.category !== "Все") {
+        productsFiltered = productsFiltered.filter(item =>
+          item.category.includes(action.payload.category));
+      }
+
+      return { ...state, productsFiltered: productsFiltered };
 
     case FilterActionTypes.FILTER_CATEGORIES:
-      state.products = state.products.filter(item => item.category.includes(action.payload));
-      return { ...state };
-
-    case FilterActionTypes.SEARCH_BRANDS:
-      state.products = state.products.filter(item => item.brand.includes(state.brand));
-      return { ...state };
-
-    case FilterActionTypes.CHANGE_BRAND:
-      return { ...state, brand: action.payload.toUpperCase() };
+      action.payload === "Все" ?
+        productsFiltered = state.products :
+        productsFiltered = state.products.filter(item => item.category.includes(action.payload));
+      return { ...state, productsFiltered: productsFiltered };
 
     case FilterActionTypes.SORT_PRODUCTS:
       action.payload === SortTypes.NAME_INCREASE ?
-        state.products = state.products.sort((a, b) => a.name > b.name ? 1 : -1) :
+        productsFiltered = state.productsFiltered.sort((a, b) => a.name > b.name ? 1 : -1) :
+
         action.payload === SortTypes.NAME_DECREASE ?
-          state.products = state.products.sort((a, b) => a.name > b.name ? -1 : 1) :
+          productsFiltered = state.productsFiltered.sort((a, b) => a.name > b.name ? -1 : 1) :
+
           action.payload === SortTypes.PRICE_INCREASE ?
-            state.products = state.products.sort((a, b) => a.price - b.price) :
-            state.products = state.products.sort((a, b) => b.price - a.price);
-      return { ...state };
+            productsFiltered = state.productsFiltered.sort((a, b) => a.price - b.price) :
+            productsFiltered = state.productsFiltered.sort((a, b) => b.price - a.price);
+
+      return { ...state, productsFiltered: productsFiltered };
 
     default:
       return state;

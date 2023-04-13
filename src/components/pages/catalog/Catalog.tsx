@@ -1,30 +1,22 @@
 import { useDispatch } from 'react-redux';
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import { Container } from '../../Container';
 import { IconBox } from '../../IconBox';
-import { ImgBox } from '../../ImgBox';
-import { CheckBox } from '../../CheckBox';
 import { BreadCrumbs } from '../../breadCrumbs/BreadCrumbs';
 import { List } from '../../List';
 import { ItemString } from '../../ItemString';
+import { ItemInput } from '../../ItemInput';
 import { Button } from '../../button/Button';
-import { InputWithIcon } from '../../inputWithIcon/InputWithIcon';
+import { Select } from '../../Select';
+import { InputButton } from '../../inputButton/InputButton';
 import { PriceInputBox } from '../../priceInputBox/PriceInputBox';
-import { IProduct } from '../../../types/types';
+import { IProduct, Filter, IItemText, IOptionValue } from '../../../types/types';
 import { BasketActionTypes, FilterActionTypes } from '../../../store/reducers/types';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import { productPropertyArray } from '../../../functions/productPropertyArray';
-import { productSizeIcon } from '../../../functions/productSizeIcon';
-import { productSize } from '../../../functions/productSize';
 import './Catalog.css'
 import '../../../styles/styles.css'
-import productsBase from "../../../db.json"
-import { Select } from '../../Select';
-
-const sortIcon = <svg width="7" height="6" viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M3.5 6L0.468911 0.750001L6.53109 0.75L3.5 6Z" fill="#3F4E65" />
-</svg>
+import { ProductBoxCatalog } from '../../ProductBoxCatalog';
+import { getNumberPages } from '../../../functions/getNumberPages';
 
 const searchIcon = <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
   <path d="M15.5294 15.5294L12.0989 12.0928L15.5294 15.5294ZM14 7.5C14 9.22391 13.3152 10.8772 12.0962 12.0962C10.8772 13.3152 9.22391 14 7.5 14C5.77609 14 4.12279 13.3152 2.90381 12.0962C1.68482 10.8772 1 9.22391 1 7.5C1 5.77609 1.68482 4.12279 2.90381 2.90381C4.12279 1.68482 5.77609 1 7.5 1C9.22391 1 10.8772 1.68482 12.0962 2.90381C13.3152 4.12279 14 5.77609 14 7.5V7.5Z" stroke="white" strokeWidth="1.3" strokeLinecap="round" />
@@ -38,38 +30,146 @@ const deletetIcon = <svg width="19" height="19" viewBox="0 0 19 19" fill="none" 
   <path d="M12.625 3.25H17.3125C17.5197 3.25 17.7184 3.33231 17.8649 3.47882C18.0114 3.62534 18.0938 3.82405 18.0938 4.03125C18.0938 4.23845 18.0114 4.43716 17.8649 4.58368C17.7184 4.73019 17.5197 4.8125 17.3125 4.8125H16.4484L15.2734 15.4C15.1673 16.3555 14.7125 17.2384 13.9961 17.8795C13.2797 18.5207 12.352 18.8751 11.3906 18.875H7.60938C6.64797 18.8751 5.72029 18.5207 5.00389 17.8795C4.28749 17.2384 3.8327 16.3555 3.72656 15.4L2.55 4.8125H1.6875C1.4803 4.8125 1.28159 4.73019 1.13507 4.58368C0.98856 4.43716 0.90625 4.23845 0.90625 4.03125C0.90625 3.82405 0.98856 3.62534 1.13507 3.47882C1.28159 3.33231 1.4803 3.25 1.6875 3.25H6.375C6.375 2.4212 6.70424 1.62634 7.29029 1.04029C7.87634 0.45424 8.6712 0.125 9.5 0.125C10.3288 0.125 11.1237 0.45424 11.7097 1.04029C12.2958 1.62634 12.625 2.4212 12.625 3.25ZM9.5 1.6875C9.0856 1.6875 8.68817 1.85212 8.39515 2.14515C8.10212 2.43817 7.9375 2.8356 7.9375 3.25H11.0625C11.0625 2.8356 10.8979 2.43817 10.6049 2.14515C10.3118 1.85212 9.9144 1.6875 9.5 1.6875ZM7.15625 7.9375V14.1875C7.15625 14.3947 7.23856 14.5934 7.38507 14.7399C7.53159 14.8864 7.7303 14.9688 7.9375 14.9688C8.1447 14.9688 8.34341 14.8864 8.48993 14.7399C8.63644 14.5934 8.71875 14.3947 8.71875 14.1875V7.9375C8.71875 7.7303 8.63644 7.53159 8.48993 7.38507C8.34341 7.23856 8.1447 7.15625 7.9375 7.15625C7.7303 7.15625 7.53159 7.23856 7.38507 7.38507C7.23856 7.53159 7.15625 7.7303 7.15625 7.9375ZM11.0625 7.15625C10.8553 7.15625 10.6566 7.23856 10.5101 7.38507C10.3636 7.53159 10.2812 7.7303 10.2812 7.9375V14.1875C10.2812 14.3947 10.3636 14.5934 10.5101 14.7399C10.6566 14.8864 10.8553 14.9688 11.0625 14.9688C11.2697 14.9688 11.4684 14.8864 11.6149 14.7399C11.7614 14.5934 11.8438 14.3947 11.8438 14.1875V7.9375C11.8438 7.7303 11.7614 7.53159 11.6149 7.38507C11.4684 7.23856 11.2697 7.15625 11.0625 7.15625Z" fill="white" />
 </svg>
 
+const moreIcon = <svg width="7" height="6" viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M3.5 6L0.468911 0.750001L6.53109 0.75L3.5 6Z" fill="#3F4E65" />
+</svg>
+
+const lessIcon = <svg width="7" height="6" viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M3.5 0L6.53109 5.25L0.468911 5.25L3.5 0Z" fill="#3F4E65" />
+</svg>
+
+const leftIcon = <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M9 2.28571L3.375 8L9 13.7143L7.875 16L2.54292e-07 8L7.875 9.83506e-08L9 2.28571Z" fill="#FFC85E" />
+</svg>
+
+const rightIcon = <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 13.7143L5.625 8L0 2.28571L1.125 0L9 8L1.125 16L0 13.7143Z" fill="#FFC85E" />
+</svg>
+
+type Price = {
+  min: number;
+  max: number
+}
+
 export const Catalog = () => {
+
   const filter = useTypedSelector(state => state.filter);
   const dispatch = useDispatch();
 
-  const categories: string[] = productsBase.goods.
+  const categoriesAll: string[] = filter.products.
     map(item => item.category).
     reduce((array, item) => array.concat(item), new Array<string>).
     sort().
     filter((value, index, self) => self.indexOf(value) === index);
 
+  const brandsAll: string[] = filter.products.
+    map(item => item.brand).
+    sort().
+    filter((value, index, self) => self.indexOf(value) === index);
+
+  const checkedBrands: Set<string> = new Set<string>();
+  const limitProducts: number = 6;
+  const defaultPrice: Price = { min: 0, max: 10000 };
+
+  const [price, setPrice] = useState<Price>(defaultPrice);
+  const [brands, setBrands] = useState<string[]>(brandsAll);
+  const [brandValue, setBrandValue] = useState<string>("");
+  const [visibile, setVisibile] = useState<boolean>(false);
+  const [prevCategory, setPrevCategory] = useState<number>(0);
+  const [pageCurrent, setPageCurrent] = useState<number>(1);
+
+  const [categoriesMenu, setCategoriesMenu] = useState<IItemText[]>(
+    [
+      {
+        item: "Все",
+        itemClass: "page-catalog__category page-catalog__category_active"
+      },
+      ...categoriesAll.
+        map(item => {
+          return {
+            item: item, itemClass: "page-catalog__category"
+          }
+        })
+    ]
+  );
+
+  const [categoriesFilter, setCategoriesFilter] = useState<IItemText[]>(
+    [
+      {
+        item: "Все",
+        itemClass: "page-catalog__filters__category page-catalog__filters__category_active"
+      },
+      ...categoriesAll.
+        map(item => {
+          return {
+            item: item, itemClass: "page-catalog__filters__category"
+          }
+        })
+    ]
+  );
+
   const addProduct = (product: IProduct): void => {
-    dispatch({ type: BasketActionTypes.CHANGE_QUANTITY_PRODUCT, payload: { product: product, quantity: 1 } });
+    dispatch({
+      type: BasketActionTypes.CHANGE_QUANTITY_PRODUCT,
+      payload: { product: product, difference: 1 }
+    });
   }
 
-  const filterCategories = (category: string): void => {
-    dispatch({ type: FilterActionTypes.FILTER_CATEGORIES, payload: category });
+  const filterBrands = (category: string): void => {
+    if (category === "Все")
+      setBrands(brandsAll);
+
+    else {
+      const brandsСhoosedCategory: string[] = filter.products.
+        filter(item => item.category.includes(category)).
+        map(item => item.brand).
+        sort().
+        filter((value, index, self) => self.indexOf(value) === index);
+      setBrands(brandsСhoosedCategory);
+    }
+  }
+
+  const chooseCategories = (prev: number, current: number): void => {
+    deleteFilters();
+
+    categoriesMenu[prev].itemClass = "page-catalog__category";
+    categoriesFilter[prev].itemClass = "page-catalog__filters__category";
+    categoriesMenu[current].itemClass = "page-catalog__category page-catalog__category_active";
+    categoriesFilter[current].itemClass = "page-catalog__filters__category page-catalog__filters__category_active";
+
+    setPrevCategory(current);
+    setPageCurrent(1);
+    dispatch({ type: FilterActionTypes.FILTER_CATEGORIES, payload: categoriesMenu[current].item });
+    filterBrands(categoriesMenu[current].item);
   }
 
   const filterProducts = (): void => {
-    dispatch({ type: FilterActionTypes.FILTER_PRODUCTS });
+    let brandFilter: Filter = { name: "brand", filters: Array.from(checkedBrands) };
+    dispatch({
+      type: FilterActionTypes.FILTER_PRODUCTS,
+      payload: {
+        price: { min: price.min, max: price.max },
+        filters: [brandFilter],
+        category: categoriesMenu[prevCategory].item
+      }
+    });
+    setPageCurrent(1);
+  }
+
+  const sortProducts = (event: React.ChangeEvent<HTMLSelectElement>): void => {
+    if (event.target.value !== "DEFAULT") {
+      dispatch({ type: FilterActionTypes.SORT_PRODUCTS, payload: event.target.value });
+      setPageCurrent(1);
+    }
   }
 
   const deleteFilters = (): void => {
-    dispatch({ type: FilterActionTypes.DELETE_FILTERS });
-  }
-
-  const changeBrands = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    dispatch({ type: FilterActionTypes.CHANGE_BRAND, payload: event.target.value });
-  }
-
-  const searchBrands = (): void => {
-    dispatch({ type: FilterActionTypes.SEARCH_BRANDS });
+    (document.getElementById("checkBox") as HTMLFormElement).reset();
+    setPrice(defaultPrice);
+    filterBrands(categoriesMenu[prevCategory].item);
+    setBrandValue("");
+    dispatch({ type: FilterActionTypes.FILTER_CATEGORIES, payload: categoriesMenu[prevCategory].item });
+    setPageCurrent(1);
   }
 
   return (
@@ -78,29 +178,44 @@ export const Catalog = () => {
       <Container containerClass='page-catalog__container container'>
 
         <BreadCrumbs
-          prev={[{ text: "Главная", link: "/" }]}
+          prev={[{ item: "Главная", link: "/sultan" }]}
           page='Каталог'
         />
 
         <Container containerClass='page-catalog__row'>
-          <p className="page-catalog__title">Косметика и гигиена</p>
+          <p className="page-catalog__title">Категории</p>
 
           <Container containerClass="page-catalog__box-row">
             <p className="page-catalog__sort">Сортировка:</p>
-            <Select selectClass="page-catalog__select" />
+
+            <Select<IOptionValue>
+              selectClass="page-catalog__select"
+              options={[
+                { text: "сортировать по", value: "DEFAULT", selected: true },
+                { text: "Название ▼", value: "NAME_INCREASE" },
+                { text: "Название ▲", value: "NAME_DECREASE" },
+                { text: "Цена ▼", value: "PRICE_INCREASE" },
+                { text: "Цена ▲", value: "PRICE_DECREASE" }
+              ]}
+              renderOption={option =>
+                <option value={option.value} selected={option.selected}>{option.text}</option>
+              }
+              onChange={event => sortProducts(event)}
+            />
+
           </Container>
 
         </Container>
 
         <Container containerClass='page-catalog__category-menu'>
 
-          <List<string>
-            list={categories}
-            renderItem={(item: string) =>
+          <List<IItemText>
+            list={categoriesMenu}
+            renderItem={item =>
               <ItemString
-                item={item}
-                itemClass="page-catalog__categories__item"
-                onClick={() => filterCategories(item)}
+                item={item.item}
+                itemClass={item.itemClass}
+                onClick={() => chooseCategories(prevCategory, categoriesMenu.indexOf(item))}
               />}
           />
 
@@ -117,8 +232,10 @@ export const Catalog = () => {
                 <p className="page-catalog__filters__subtitle">Цена <b>₸</b></p>
               </Container>
               <PriceInputBox
-                min={filter.minPrice}
-                max={filter.maxPrice}
+                min={price.min}
+                changeMinPrice={event => setPrice({ min: +event.target.value, max: price.max })}
+                max={price.max}
+                changeMaxPrice={event => setPrice({ min: price.min, max: +event.target.value })}
                 boxClass="page-catalog__filters__price-filter"
               />
             </Container>
@@ -127,30 +244,62 @@ export const Catalog = () => {
 
               <p className='page-catalog__filters__title'>Бренд</p>
 
-              <InputWithIcon
+              <InputButton
                 placeholder='Поиск...'
                 icon={searchIcon}
-                onChange={changeBrands}
-                onClick={searchBrands}
+                value={brandValue}
+                onChange={event => {
+                  setBrands(brands.filter(item => item.includes(event.target.value.toUpperCase())));
+                  setBrandValue(event.target.value);
+
+                }}
               />
 
-              <CheckBox
-                list={(filter.products.map(item => item.brand)).
-                  sort().
-                  filter((value, index, self) => self.indexOf(value) === index)}
-                itemClass="page-catalog__filters__check"
-                boxClass="page-catalog__filters__check-box"
-              />
+              <form id='checkBox' className="page-catalog__filters__check-box">
+                <List<string>
+                  list={
+                    visibile ?
+                      brands :
+                      brands.filter(item => brands.indexOf(item) < 4)
+                  }
+                  renderItem={(item: string) =>
+                    <ItemInput
+                      item={item}
+                      itemClass="page-catalog__filters__check"
+                      onCheck={event => event.target.checked ?
+                        checkedBrands.add(item) :
+                        checkedBrands.delete(item)
+                      }
+                    />
+                  }
+                />
+              </form>
+
+              <Container containerClass='page-catalog__box-row'>
+                <p className='page-catalog__filters__show'>
+                  {visibile ? "Скрыть" : "Показать все"}
+                </p>
+
+                <IconBox
+                  icon={
+                    visibile ?
+                      lessIcon :
+                      moreIcon
+                  }
+                  boxClass="page-catalog__icon"
+                  onClick={() => setVisibile(!visibile)}
+                />
+              </Container>
 
               <Container containerClass='page-catalog__button-box'>
                 <Button
-                  onClick={filterProducts}
+                  onClick={() => filterProducts()}
                 >
                   Показать
                 </Button>
                 <Button
                   buttonClass="page-catalog__button-icon"
-                  onClick={deleteFilters}
+                  onClick={() => deleteFilters()}
                 >
                   <IconBox
                     icon={deletetIcon}
@@ -165,78 +314,86 @@ export const Catalog = () => {
 
               <p className='page-catalog__filters__title'>Категории</p>
 
-              <List<string>
-                list={categories}
-                renderItem={(item: string) =>
+              <List<IItemText>
+                list={categoriesFilter}
+                renderItem={item =>
                   <ItemString
-                    item={item}
-                    itemClass="page-catalog__filters__category"
-                  />}
-              />
+                    item={item.item}
+                    itemClass={item.itemClass}
+                    onClick={() => chooseCategories(prevCategory, categoriesFilter.indexOf(item))}
+                  />} />
 
             </Container>
 
           </Container>
 
           <Container containerClass='page-catalog__catalog-box'>
+            <Container containerClass='page-catalog__products'>
 
-            {filter.products.map(item =>
-              <Container containerClass='page-catalog__product-box'>
+              {filter.productsFiltered.
+                filter(product => filter.productsFiltered.indexOf(product) < pageCurrent * limitProducts &&
+                  filter.productsFiltered.indexOf(product) >= (pageCurrent - 1) * limitProducts).
+                map(product =>
+                  <Container containerClass='page-catalog__product-box'>
 
-                <Container containerClass='page-catalog__product-data'>
-
-
-                  <ImgBox
-                    imgClass='page-catalog__product-box__img'
-                    imgSrc={item.url}
-                    boxClass='page-catalog__product-box__img-box'
-                  />
-
-
-                  <Container containerClass='page-catalog__box-row'>
-
-                    <IconBox
-                      icon={productSizeIcon(item, "small")}
-                      boxClass="page-catalog__icon"
+                    <ProductBoxCatalog
+                      product={product}
+                      boxClass="page-catalog__product-data"
+                      boximgClass="page-catalog__product-box__img-box"
+                      imgClass="page-catalog__product-box__img"
+                      rowClass="page-catalog__box-row"
+                      iconClass="page-catalog__icon"
+                      sizeClass="page-catalog__product-box__size"
+                      nameClass="page-catalog__product-box__name"
+                      propertyClass="page-catalog__product-box__item"
                     />
 
-                    <p className='page-catalog__product-box__size'>{productSize(item)}</p>
+                    <Container containerClass='page-catalog__button-box'>
+
+                      <p className='page-catalog__product-box__price'>{product.price}</p>
+
+                      <Button onClick={() => addProduct(product)}>
+                        В корзину
+                        <IconBox
+                          icon={basketIcon}
+                          boxClass='page-catalog__icon'
+                        />
+                      </Button>
+
+                    </Container>
 
                   </Container>
+                )}
 
-                  <NavLink to={`/catalog/${item.vendorCode}`}>
-                    <p className='page-catalog__product-box__name'>{item.name}</p>
-                  </NavLink>
+            </Container>
 
-                  <List<string>
-                    list={productPropertyArray(item).filter((item) => item.includes("Бренд") ||
-                      item.includes("Страна") ||
-                      item.includes("Артикул"))}
-                    renderItem={(item: string) =>
-                      <ItemString
-                        item={item}
-                        itemClass="page-catalog__product-box__item"
-                      />}
-                  />
+            <Container containerClass='page-catalog__pages-box'>
 
-                </Container>
+              <IconBox
+                icon={leftIcon}
+                boxClass='page-catalog__icon'
+              />
 
-                <Container containerClass='page-catalog__button-box'>
+              {Array.from(Array(getNumberPages(filter.productsFiltered.length, limitProducts)).keys()).map(page =>
+                <p
+                  className=
+                  {
+                    pageCurrent === page + 1 ?
+                      'page-catalog__pages-box__page page-catalog__pages-box__page_current' :
+                      'page-catalog__pages-box__page'
+                  }
+                  onClick={() => setPageCurrent(page + 1)}
+                >
+                  {page + 1}
+                </p>
+              )}
 
-                  <p className='page-catalog__product-box__price'>{item.price}</p>
+              <IconBox
+                icon={rightIcon}
+                boxClass='page-catalog__pages-box__icon'
+              />
 
-                  <Button onClick={() => addProduct(item)}>
-                    В корзину
-                    <IconBox
-                      icon={basketIcon}
-                      boxClass='page-catalog__button-box__icon'
-                    />
-                  </Button>
-
-                </Container>
-
-              </Container>
-            )}
+            </Container>
 
           </Container>
 

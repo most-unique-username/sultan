@@ -1,11 +1,17 @@
-export interface IText {
-  text: string;
-  textClass: string;
+export interface IItemText {
+  item: string;
+  itemClass: string;
 }
 
-export interface ILink {
-  text: string;
+export interface IItemLink {
+  item: string;
   link: string;
+}
+
+export interface IOptionValue {
+  text: string;
+  value: string;
+  selected?: boolean;
 }
 
 export interface IProduct {
@@ -24,6 +30,11 @@ export interface IProduct {
 export type BusketProduct = {
   product: IProduct;
   quantity: number;
+}
+
+export type Filter = {
+  name: "brand";
+  filters: string[];
 }
 
 export enum SortTypes {

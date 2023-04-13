@@ -1,6 +1,6 @@
 import { IProduct } from '../types/types';
 
-export const productPropertyArray = (product: IProduct): string[] => {
+export const productProperties = (product: IProduct): string[] => {
   let sizeType: string = "";
   product.sizeType === "Вес" ? sizeType = "г." : sizeType = "мл.";
   let arr: string[] = [];

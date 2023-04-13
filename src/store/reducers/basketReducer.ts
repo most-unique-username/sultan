@@ -17,19 +17,20 @@ export const basketReducer = (state = initialState, action: BasketAction): Baske
   let product: IProduct;
   let quantity: number;
   let price: number;
-  console.log(state);
+
   switch (action.type) {
 
     case BasketActionTypes.CHANGE_QUANTITY_PRODUCT:
       product = state.basket.get(action.payload.product.vendorCode)?.product ?? action.payload.product;
       quantity = state.basket.get(action.payload.product.vendorCode)?.quantity ?? 0;
-      price = action.payload.quantity * product.price;
-      quantity += action.payload.quantity;
+      price = action.payload.difference * product.price;
+      quantity += action.payload.difference;
       state.basket.set(product.vendorCode,
         { product: product, quantity: quantity });
+
       return {
         ...state,
-        products: state.products + action.payload.quantity,
+        products: state.products + action.payload.difference,
         sum: +(state.sum + price).toFixed(2)
       };
 
@@ -38,6 +39,7 @@ export const basketReducer = (state = initialState, action: BasketAction): Baske
       quantity = state.basket.get(action.payload)?.quantity ?? 0;
       price = (deletedProduct?.product?.price ?? 0) * quantity;
       state.basket.delete(action.payload);
+
       return {
         ...state,
         products: state.products - quantity,

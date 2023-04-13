@@ -1,4 +1,28 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600700;800&display=swap");
+.container {
+  padding: 0 15%;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 3%;
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 4%;
+  }
+}
+@media (min-width: 1400px) {
+  .container {
+    padding: 0 7%;
+  }
+}
+@media (min-width: 1800px) {
+  .container {
+    padding: 0 15%;
+  }
+}
 .page-basket {
   font-family: Inter, sans-serif;
   color: #111111;
@@ -7,6 +31,7 @@
 .page-basket__row {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 50px 0;
   border-bottom: 1px dashed #3F4E65;
 }
@@ -17,12 +42,16 @@
 .page-basket__box-row {
   display: flex;
 }
+.page-basket__product-data {
+  word-wrap: break-word;
+  overflow: hidden;
+}
 .page-basket__price-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-width: 450px;
-  padding-left: 100px;
+  min-width: 33%;
+  max-width: 33%;
 }
 .page-basket__title {
   font-size: 40px;
@@ -34,12 +63,15 @@
 }
 .page-basket__product-box {
   display: flex;
-  flex-grow: 1;
+  min-width: 65%;
+  max-width: 65%;
+  align-items: center;
 }
 .page-basket__product-box__img-box {
   text-align: center;
   height: 191px;
   width: 281px;
+  min-width: 281px;
   margin-right: 20px;
 }
 .page-basket__product-box__img {
@@ -59,11 +91,12 @@
   font-weight: 700;
   line-height: 36px;
 }
-.page-basket__product-box__discription {
+.page-basket__product-box__description {
   font-size: 12px;
   font-weight: 300;
   line-height: 18px;
   color: #3F4E65;
+  padding-top: 10px;
 }
 .page-basket__price {
   font-size: 30px;
@@ -75,4 +108,36 @@
 }
 .page-basket__button {
   line-height: 0;
+}
+
+@media (max-width: 1024px) {
+  .page-basket__product-box {
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+    min-width: 50%;
+    max-width: 50%;
+  }
+  .page-basket__price-box {
+    min-width: 48%;
+    max-width: 48%;
+  }
+}
+@media (max-width: 800px) {
+  .page-basket__row,
+  .page-basket__product-box,
+  .page-basket__price-box {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .page-basket__product-box__img-box {
+    width: 100%;
+    margin: 0;
+  }
+  .page-basket__product-box,
+  .page-basket__product-data {
+    min-width: 100%;
+    max-width: 100%;
+  }
 }

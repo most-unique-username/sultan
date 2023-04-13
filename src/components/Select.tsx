@@ -2,26 +2,25 @@ import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { FilterActionTypes } from '../store/reducers/types';
 
-export interface SelectProps {
+interface SelectProps<T> {
   selectClass: string;
+  options: T[];
+  renderOption: (option: T) => React.ReactNode;
+  multiple?: boolean;
+  required?: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-export const Select: FC<SelectProps> = (props) => {
-  const dispatch = useDispatch();
-
-  const sortProducts = (event: React.ChangeEvent<HTMLSelectElement>): void => {
-    dispatch({ type: FilterActionTypes.SORT_PRODUCTS, payload: event.target.value });
-  }
+export function Select<T>(props: SelectProps<T>) {
 
   return (
     <select
       className={props.selectClass}
-      onChange={sortProducts}
+      onChange={props.onChange}
+      multiple={props.multiple}
+      required={props.required}
     >
-      <option value="NAME_INCREASE">Название ↓</option>
-      <option value="NAME_DECREASE">Название ↑</option>
-      <option value="PRICE_DECREASE">Цена ↓</option>
-      <option value="PRICE_INCREASE">Цена ↑</option>
+      {props.options.map(props.renderOption)}
     </select>
   );
 }
