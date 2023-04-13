@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/sultan/static/css/main.d0f8cfe3.css",
+    "main.js": "/sultan/static/js/main.e4360366.js",
+    "static/media/noImage.jpg": "/sultan/static/media/noImage.90aa7747e405e44ee55c.jpg",
+    "index.html": "/sultan/index.html",
+    "main.d0f8cfe3.css.map": "/sultan/static/css/main.d0f8cfe3.css.map",
+    "main.e4360366.js.map": "/sultan/static/js/main.e4360366.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d0f8cfe3.css",
+    "static/js/main.e4360366.js"
+  ]
+}
