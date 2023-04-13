@@ -6,7 +6,7 @@ interface InputProps {
   value?: string;
   required?: boolean;
   inputClass?: string;
-  disabled?: boolean;
+  readOnly?: boolean;
   type?: "number";
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -14,7 +14,6 @@ interface InputProps {
 export const Input: FC<InputProps> = (props) => {
   const inputClass = (props.inputClass && `input ${props.inputClass}`) ??
     "input";
-
 
   return (
     <input
@@ -24,7 +23,7 @@ export const Input: FC<InputProps> = (props) => {
       value={props.value}
       onChange={props.onChange}
       required={props.required}
-      disabled={props.disabled}
+      readOnly={props.readOnly}
     />
   );
 }

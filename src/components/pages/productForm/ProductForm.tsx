@@ -33,7 +33,6 @@ type Visibile = {
 }
 
 export const ProductForm = () => {
-  // localStorage.clear();
 
   const defaultProduct: IProduct = {
     vendorCode: NaN,
@@ -125,7 +124,7 @@ export const ProductForm = () => {
                   placeholder='Артикул'
                   onChange={event => updateProduct(event, "vendorCode")}
                   required={true}
-                  disabled={buttonName === "Обновить"}
+                  readOnly={buttonName === "Обновить"}
                   type="number"
                   value={product.vendorCode.toString()}
                 />
@@ -148,10 +147,12 @@ export const ProductForm = () => {
                     iconClass={visibile.categories ? iconClassDown : iconClassUp}
                     onClick={() => setVisibile(() => ({ ...visibile, categories: !visibile.categories }))}
                     required={true}
+                    readOnly={true}
                     value={categoriesChecked.join(", ")}
                   />
 
                   <Container
+                    testId="listCategories"
                     containerClass="page-product-form__list"
                     hidden={!visibile.categories}
                   >

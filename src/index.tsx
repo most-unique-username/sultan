@@ -11,6 +11,7 @@ import { store } from './store/index';
 import './index.css'
 
 let rootElement = document.getElementById('root');
+
 if (!rootElement) {
   rootElement = document.createElement("div");
   rootElement.className = "page-body";

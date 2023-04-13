@@ -9,7 +9,7 @@ interface InputButtonProps {
   value?: string;
   boxClass?: string;
   iconClass?: string;
-  disabled?: boolean;
+  readOnly?: boolean;
   required?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onClick?: () => void;
@@ -27,7 +27,7 @@ export const InputButton: FC<InputButtonProps> = (props) => {
         value={props.value}
         onChange={props.onChange}
         required={props.required}
-        disabled={props.disabled}
+        readOnly={props.readOnly}
       />
       <Button
         buttonClass={iconClass}
