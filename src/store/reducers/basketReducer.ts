@@ -36,7 +36,7 @@ export const basketReducer = (state = initialState, action: BasketAction): Baske
 
     case BasketActionTypes.DELETE_PRODUCT:
       let deletedProduct = state.basket.get(action.payload);
-      quantity = state.basket.get(action.payload)?.quantity ?? 0;
+      quantity = deletedProduct?.quantity ?? 0;
       price = (deletedProduct?.product?.price ?? 0) * quantity;
       state.basket.delete(action.payload);
 

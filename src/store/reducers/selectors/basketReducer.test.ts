@@ -42,6 +42,16 @@ describe("Basket reducer", () => {
       })).products).toBe(2)
   });
 
+  test("Удаление несуществующего товара", () => {
+    expect((basketReducer({
+      basket: basket,
+      products: 5,
+      sum: 500,
+    },
+      { type: BasketActionTypes.DELETE_PRODUCT, payload: 111111 }
+    )).products).toBe(5)
+  });
+
   test("Удаление товара", () => {
     expect((basketReducer({
       basket: basket,
